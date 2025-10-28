@@ -28,7 +28,7 @@ class TaskManager:
 
         tk.Button(btn_frame, text= "adicionar", command=self.add_task).pack(side=tk.LEFT, padx=5)
         tk.Button(btn_frame, text= "Remover", command=self.remove_task).pack(side=tk.LEFT, padx=5)
-        tk.Button(btn_frame, text= "Concluir", command=self.complete_task).pack(side=tk.LEFT, padx=5)
+        tk.Button(btn_frame, text= "Concluir", command=self.complete_tasl).pack(side=tk.LEFT, padx=5)
         #lista tarefas
         self.task_list = tk.Listbox(main_frame, width=60, height=15)
         self.task_list.pack(pady= 10)
@@ -73,7 +73,19 @@ class TaskManager:
         except:
             messagebox.showwarning("Aviso", "Selecione uma tarefa!")
 
-    def update_task
+    def update_task_list(self):
+        self.task_list.delete(0, tk.END)
+        for i, task in enumerate(self.tasks):
+            status = "OK" if task["completed"] else " "
+            self.task_list.insert(tk.END, f"{i+1}. [{status}] {task ['text']}")
+            if task ["completed"]:
+                self.task_list.intemconfig(tk.END, {'fg': 'blue'})
+
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = TaskManager(root)
+    root.mainloop()  
 
 
     
